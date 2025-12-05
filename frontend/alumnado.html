@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Boletín Digital - Departamento de Alumnado</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/alumnado.js" defer></script>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-inner">
+      <div class="logo-title">
+        <img src="img/logo-boletin.png" alt="Logo Boletín Digital" class="logo-img">
+        <span class="site-name">Boletín Digital - Departamento Alumnado</span>
+      </div>
+
+      <nav class="header-actions">
+        <a href="index.html" class="header-button">Volver al inicio</a>
+        <a href="cursos_materias.html" class="header-button">Modificar cursos/materias</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-layout alumnado-layout">
+    <!-- Panel izquierdo: lista de alumnos -->
+    <section class="left-panel alumnado-list">
+      <div class="card">
+        <h2>Alumnos</h2>
+
+        <div class="form-group">
+          <label for="filtroAlumno">Buscar por nombre, usuario o DNI</label>
+          <input type="text" id="filtroAlumno" placeholder="Ej: Juan, 12345678">
+        </div>
+
+        <div class="form-group">
+          <label for="filtroCurso">Curso</label>
+          <select id="filtroCurso">
+            <option value="">Todos</option>
+            <!-- Opciones de cursos agregadas dinámicamente por alumnado.js -->
+          </select>
+        </div>
+
+        <!-- LISTA DE ALUMNOS CON SCROLL -->
+        <div class="card-scroll">
+          <div class="alumnos-lista" id="alumnosLista">
+            <!-- Se llena por JS con botones clickeables de alumnos -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel derecho: boletín del alumno seleccionado -->
+    <section class="right-panel alumnado-boletin">
+      <div class="card">
+        <h2 id="tituloBoletin">Boletín - Seleccioná un alumno</h2>
+
+        <div class="boletin-header">
+          <p class="small-text">
+            Ciclo lectivo actual. Seleccioná un alumno en la lista para cargar o editar su boletín.
+          </p>
+        </div>
+
+        <!-- TABLA DEL BOLETÍN SIN SCROLL INTERNO (QUEDA FIJO) -->
+        <div class="table-container">
+          <table class="data-table" id="tablaBoletin">
+            <thead>
+              <tr>
+                <th rowspan="2">Materia</th>
+                <th colspan="3">Primer cuatrimestre</th>
+                <th colspan="3">Segundo cuatrimestre</th>
+                <th colspan="3">Período de recuperación</th>
+              </tr>
+              <tr>
+                <th>1ra nota parcial</th>
+                <th>2da nota parcial</th>
+                <th>Nota final</th>
+                <th>1ra nota parcial</th>
+                <th>2da nota parcial</th>
+                <th>Nota final</th>
+                <th>Diciembre acreditación</th>
+                <th>Feb/Mar recuperatorio</th>
+                <th>Nota definitiva</th>
+              </tr>
+            </thead>
+            <tbody id="boletinBody">
+              <!-- Filas por materia generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="boletin-actions">
+          <button id="btnGuardarBoletin" class="primary-button" disabled>
+            Guardar boletín
+          </button>
+          <p id="alumnadoMessage" class="small-text"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+<footer class="main-footer">
+  <p>Hecho por Comunicaciones Leon</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Boletín Digital - Panel Administrador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/admin.js" defer></script>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-inner">
+      <div class="logo-title">
+        <img src="img/logo-boletin.png" alt="Logo Boletín Digital" class="logo-img">
+        <span class="site-name">Boletín Digital - Administrador</span>
+      </div>
+
+      <nav class="header-actions">
+        <a href="index.html" class="header-button">Volver al inicio</a>
+        <a href="cursos_materias.html" class="header-button">Modificar cursos/materias</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-layout admin-layout">
+    <!-- Panel izquierdo: filtros -->
+    <section class="left-panel admin-filters">
+      <div class="card">
+        <h2>Filtros</h2>
+
+        <div class="form-group">
+          <label for="filtroTexto">Buscar por usuario, nombre o DNI</label>
+          <input type="text" id="filtroTexto" placeholder="Ej: juan, 12345678">
+        </div>
+
+        <div class="form-group">
+          <label for="filtroRol">Rol</label>
+          <select id="filtroRol">
+            <option value="">Todos</option>
+            <option value="admin">Administrador</option>
+            <option value="alumnado">Alumnado</option>
+            <option value="alumno">Alumno</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="filtroEstado">Estado de cuenta</label>
+          <select id="filtroEstado">
+            <option value="">Todos</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="aprobado">Aprobado</option>
+            <option value="deshabilitado">Deshabilitado</option>
+          </select>
+        </div>
+
+        <button id="btnAplicarFiltros" class="primary-button">
+          Aplicar filtros
+        </button>
+        <button id="btnLimpiarFiltros" class="text-button">
+          Limpiar filtros
+        </button>
+      </div>
+    </section>
+
+    <!-- Panel derecho: gestión de usuarios -->
+    <section class="right-panel admin-users">
+      <div class="card">
+        <h2>Gestión de usuarios</h2>
+        <p class="small-text">
+          Desde aquí podés aprobar cuentas nuevas, cambiar el rol, actualizar datos,
+          deshabilitar o eliminar usuarios si es necesario.
+        </p>
+
+        <!-- Botón para mostrar el formulario de creación -->
+        <div class="form-actions" style="margin-bottom: 1rem;">
+          <button type="button" id="btnMostrarCrearUsuario" class="primary-button">
+            Crear nuevo usuario
+          </button>
+        </div>
+
+        <!-- Formulario completo para alta de usuarios (vía /api/register) -->
+        <div id="crearUsuarioPanel" hidden>
+          <h3>Nuevo usuario</h3>
+          <form id="crearUsuarioForm">
+            <div class="form-group">
+              <label for="nuevoUsuario">Nombre de usuario</label>
+              <input type="text" id="nuevoUsuario" name="usuario" required>
+            </div>
+
+            <div class="form-group">
+              <label for="nuevoPassword">Contraseña (segura)</label>
+              <input type="password" id="nuevoPassword" name="password" required minlength="8">
+              <small class="hint">
+                Mínimo 8 caracteres. Ideal: combinar mayúsculas, minúsculas, números y símbolos.
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label for="nuevoDni">DNI</label>
+              <input type="number" id="nuevoDni" name="dni" required>
+            </div>
+
+            <div class="form-group">
+              <label for="nuevoEmail">Email</label>
+              <input type="email" id="nuevoEmail" name="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="nuevoNombreCompleto">Nombre completo</label>
+              <input type="text" id="nuevoNombreCompleto" name="nombreCompleto" required>
+            </div>
+
+            <div class="form-group">
+              <label for="nuevoRol">Rol</label>
+              <select id="nuevoRol" name="rol" required>
+                <option value="">Seleccionar rol</option>
+                <option value="admin">Administrador</option>
+                <option value="alumnado">Alumnado</option>
+                <option value="alumno">Alumno</option>
+              </select>
+            </div>
+
+            <!-- Curso: se usará principalmente cuando el rol sea "alumno" -->
+            <div class="form-group" id="nuevoCursoGroup">
+              <label for="nuevoCurso">Curso</label>
+              <select id="nuevoCurso" name="curso">
+                <option value="">Sin curso / seleccionar curso</option>
+                <!-- Las opciones se cargarán desde JS con /api/cursos -->
+              </select>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="primary-button">Guardar usuario</button>
+              <button type="button" id="btnCancelarCrearUsuario" class="text-button">
+                Cancelar
+              </button>
+            </div>
+
+            <p id="crearUsuarioError" class="error-message"></p>
+            <p id="crearUsuarioSuccess" class="success-message"></p>
+          </form>
+        </div>
+
+        <!-- Tabla de usuarios -->
+        <!-- ENVUELTA EN card-scroll PARA LIMITAR ALTURA -->
+        <div class="card-scroll">
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Usuario</th>
+                  <th>Nombre completo</th>
+                  <th>Email</th>
+                  <th>DNI</th>
+                  <th>Rol</th>
+                  <th>Curso</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="usuariosTableBody">
+                <!-- Filas generadas por JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p id="adminMessage" class="small-text"></p>
+      </div>
+    </section>
+  </main>
+</body>
+<footer class="main-footer">
+  <p>Hecho por Comunicaciones Leon</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,573 @@
+/* =======================
+   FUENTES PERSONALIZADAS
+   ======================= */
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Anton';
+  src: url('../fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Reset simple */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Lato', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f4f6f9; /* color de respaldo */
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* FONDO CON IMAGEN */
+  background-image: url('../img/fondo.png');
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+/* =======================
+   HEADER
+   ======================= */
+
+.main-header {
+  /* En general, SIN fondo (otras páginas) */
+  background-color: #b22222;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  font-family: 'Anton', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem; /* un poco más de espacio al agrandar todo */
+}
+
+.logo-img {
+  /* ANTES: 36x36 */
+  height: 90px;
+  width: 90px;
+  object-fit: contain;
+}
+
+.site-name {
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: 0.03em; /* separación mayor entre letras */
+}
+
+/* Botón del header */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* separación de 5px entre botones */
+}
+
+.header-button {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-family: inherit;
+  letter-spacing: 0.06em; /* separación entre letras en botones */
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.header-button:hover {
+  background-color: #ffffff;
+  color: #b22222;
+}
+
+/* ================
+   HEADER SOLO INDEX
+   ================ */
+
+/* En el index (body class="page-index") el header sí tiene fondo rojo */
+.page-index .main-header {
+  background-color: #b22222; /* firebrick, rojo oscuro */
+}
+
+/* En el index centramos logo + texto (y botones debajo, centrados) */
+.page-index .header-inner {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.page-index .logo-title {
+  justify-content: center;
+}
+
+/* =======================
+   LAYOUT PRINCIPAL
+   ======================= */
+
+.main-layout {
+  flex: 1;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+
+  /* CENTRAR CONTENIDO PRINCIPAL */
+  max-width: 1100px;   /* ancho máximo del bloque central */
+  margin: 2rem auto;   /* centra horizontalmente y da respiro arriba/abajo */
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Panel izquierdo: login + registro */
+.left-panel,
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Proporciones en pantallas grandes */
+.left-panel {
+  flex: 1;
+  max-width: 420px;
+}
+
+.right-panel {
+  flex: 2;
+}
+
+/* Tarjetas */
+.card {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.card h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.6rem;  /* AUMENTO TAMAÑO FUENTE (antes 1.2rem) */
+}
+
+/* =======================
+   CONTENEDORES SCROLL INTERNOS
+   ======================= */
+
+.card-scroll {
+  max-height: 400px;     /* ajustá esta altura según te convenga */
+  overflow-y: auto;      /* scroll vertical interno */
+  padding-right: 0.5rem; /* espacio para que la barra no tape contenido */
+  box-sizing: border-box;
+}
+
+/* Formularios */
+.form-group {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+label {
+  font-size: 1.1rem;  /* AUMENTO TAMAÑO FUENTE (antes 0.9rem) */
+  font-weight: 500;
+}
+
+input,
+select {
+  padding: 0.6rem 0.7rem;   /* un poco más de alto también */
+  border-radius: 0.35rem;
+  border: 1px solid #ccd1d9;
+  font-size: 1.1rem;        /* AUMENTO TAMAÑO FUENTE (antes 0.95rem) */
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #c94507;
+  box-shadow: 0 0 0 2px rgba(27,73,101,0.15);
+}
+
+.hint {
+  font-size: 0.95rem;       /* AUMENTO TAMAÑO FUENTE (antes 0.75rem) */
+  color: #666;
+}
+
+/* Botones */
+.primary-button,
+.secondary-button,
+.text-button {
+  border-radius: 0.4rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;   /* AUMENTO TAMAÑO FUENTE (antes 0.95rem) */
+}
+
+.primary-button {
+  background-color: #b30000;
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;   /* un poco más grandes */
+}
+
+.primary-button:hover {
+  filter: brightness(1.05);
+}
+
+.secondary-button {
+  background-color: #ffffff;
+  color: #1b4965;
+  border: 1px solid #1b4965;
+  padding: 0.55rem 1.1rem;
+}
+
+.secondary-button:hover {
+  background-color: #f0f6fa;
+}
+
+.text-button {
+  background: none;
+  color: #555;
+  padding: 0.35rem 0.6rem;
+}
+
+.text-button:hover {
+  text-decoration: underline;
+}
+
+/* Acciones del formulario de registro */
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Mensajes */
+.error-message {
+  margin-top: 0.35rem;
+  font-size: 1rem;     /* AUMENTO TAMAÑO FUENTE (antes 0.8rem) */
+  color: #b12929;
+}
+
+.success-message {
+  margin-top: 0.35rem;
+  font-size: 1rem;     /* AUMENTO TAMAÑO FUENTE (antes 0.8rem) */
+  color: #197c3a;
+}
+
+/* Divider */
+.divider {
+  margin: 1rem 0;
+  border: none;
+  border-top: 1px solid #e0e4ea;
+}
+
+.small-text {
+  font-size: 1.05rem;  /* AUMENTO TAMAÑO FUENTE (antes 0.9rem) */
+  margin-bottom: 0.5rem;
+}
+
+/* Bloques de info */
+.info-block,
+.news-block {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.info-block h2,
+.news-block h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;   /* AUMENTO TAMAÑO FUENTE (antes 1.15rem) */
+}
+
+.info-block p + p {
+  margin-top: 0.5rem;
+}
+
+.news-list {
+  list-style: disc;
+  padding-left: 1.2rem;
+}
+
+.news-list li + li {
+  margin-top: 0.4rem;
+}
+
+/* RESPONSIVE: columna en pantallas chicas */
+@media (max-width: 900px) {
+  .main-layout {
+    flex-direction: column;
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  .left-panel,
+  .right-panel {
+    max-width: 100%;
+  }
+}
+
+/* Para pag administrador....*/
+/* ADMIN LAYOUT */
+.admin-layout {
+  align-items: flex-start;
+}
+
+.admin-filters {
+  max-width: 320px;
+}
+
+.admin-users {
+  flex: 1;
+}
+
+/* Tabla de datos */
+.table-container {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;  /* AUMENTO TAMAÑO FUENTE (antes 0.9rem) */
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.55rem 0.6rem;  /* un poco más de padding */
+  border-bottom: 1px solid #e0e4ea;
+  text-align: left;
+}
+
+/* ENCABEZADOS DE TABLA ADMIN EN ROJO Y ANTON */
+.data-table th {
+  background-color: #d63a3a; /* rojo más claro que el header */
+  color: #ffffff;
+  font-family: 'Anton', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.05em; /* separación entre letras en encabezados de tabla */
+}
+
+.data-table tr:nth-child(even) {
+  background-color: #fafbfc;
+}
+
+.data-table select,
+.data-table input {
+  font-size: 1rem;   /* AUMENTO TAMAÑO FUENTE (antes 0.85rem) */
+  padding: 0.35rem 0.4rem;
+}
+
+.data-table .row-actions {
+  display: flex;
+  gap: 0.3rem;
+}
+
+/* Botones pequeños para tabla */
+.btn-small {
+  font-size: 0.95rem;    /* AUMENTO TAMAÑO FUENTE (antes 0.75rem) */
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.3rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-save {
+  background-color: #1b4965;
+  color: #fff;
+}
+
+.btn-delete {
+  background-color: #b12929;
+  color: #fff;
+}
+
+.btn-save:hover,
+.btn-delete:hover {
+  filter: brightness(1.05);
+}
+
+.btn-reset {
+  background-color: #f0ad4e;
+  color: #fff;
+}
+
+.btn-reset:hover {
+  filter: brightness(1.05);
+}
+
+.config-layout {
+  align-items: flex-start;
+}
+
+.form-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.btn-inline {
+  align-self: flex-end;
+}
+
+/* Boletín alumno: layout fijo */
+.boletin-alumno-table {
+  table-layout: fixed;  /* reparte el ancho entre las columnas */
+  width: 100%;
+  font-size: 1.1rem;    /* AUMENTO TAMAÑO FUENTE EN BOLETÍN */
+}
+
+/* Todas las celdas centradas por defecto */
+.boletin-alumno-table th,
+.boletin-alumno-table td {
+  text-align: center;
+}
+
+/* ENCABEZADOS DE BOLETÍN EN ROJO Y ANTON */
+.boletin-alumno-table th {
+  background-color: #d63a3a; /* mismo rojo claro que admin */
+  color: #ffffff;
+  font-family: 'Anton', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.05em; /* separación entre letras en encabezados de boletín */
+}
+
+/* Primera columna: Materia */
+.boletin-alumno-table thead tr:first-child th:first-child {
+  text-align: left;
+  padding-left: 0.5rem;
+  width: 5%;
+}
+
+/* Celdas de la primera columna del cuerpo (nombres de materias) */
+.boletin-alumno-table tbody td:first-child {
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+/* Resto de columnas: notas, todas similares entre sí */
+.boletin-alumno-table th:not(:first-child),
+.boletin-alumno-table td:not(:first-child) {
+  width: 8.9%;           /* ~80 % restante repartido entre 9 columnas */
+}
+
+/* =======================
+   TÍTULOS GENERALES
+   ======================= */
+
+h1,
+h2,
+h3 {
+  font-family: 'Anton', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0.03em; /* separación suave en todos los títulos */
+}
+
+/* Tamaños generales de títulos (para contenidos, no header) */
+h1 {
+  font-size: 2.2rem;   /* AUMENTO TAMAÑO FUENTE */
+}
+h2 {
+  font-size: 1.8rem;   /* AUMENTO TAMAÑO FUENTE */
+}
+h3 {
+  font-size: 1.4rem;   /* AUMENTO TAMAÑO FUENTE */
+}
+
+/* =======================
+   TIPOGRAFÍA BASE
+   ======================= */
+
+/* Texto normal y números en Lato regular */
+body,
+p,
+label,
+input,
+select,
+textarea,
+.small-text,
+.hint,
+.news-list,
+.info-block,
+.news-block,
+.data-table td,
+.boletin-alumno-table td {
+  font-family: 'Lato', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;  /* AUMENTO TAMAÑO FUENTE BASE */
+}
+
+/* Elementos importantes en Lato Bold */
+.primary-button,
+.secondary-button,
+.text-button,
+.btn-small,
+.btn-save,
+.btn-delete,
+.btn-reset,
+.error-message,
+.success-message {
+  font-family: 'Lato', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 700;
+}
+
+/* =======================
+   FOOTER GENERAL
+   ======================= */
+
+.main-footer {
+  background-color: #686868;   /* gris de fondo */
+  color: #ffffff;              /* texto gris oscuro */
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  font-size: 1.05rem;   /* AUMENTO TAMAÑO FUENTE (antes 0.9rem) */
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.08);
+
+  margin-top: auto;
+}
+
+.main-footer p {
+  margin: 0;
+}
+
+#base-de-boton{
+  background-color: transparent;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Boletín Digital - Cursos y Materias</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/cursos_materias.js" defer></script>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-inner">
+      <div class="logo-title">
+        <img src="img/logo-boletin.png" alt="Logo Boletín Digital" class="logo-img">
+        <span class="site-name">Boletín Digital - Cursos y Materias</span>
+      </div>
+
+      <nav class="header-actions">
+        <!-- Antes: enlace fijo al inicio -->
+        <!-- <a href="index.html" class="header-button">Volver al inicio</a> -->
+
+        <!-- Ahora: botón que vuelve a la página anterior -->
+        <button type="button" class="header-button" onclick="volverPaginaAnterior()">
+          Volver
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-layout config-layout">
+    <!-- Panel izquierdo: CURSOS -->
+    <section class="left-panel">
+      <div class="card">
+        <h2>Gestionar cursos</h2>
+        <p class="small-text">
+          Creá, renombrá o eliminá cursos (por ejemplo: 7-1, 7-2, 7-3).
+        </p>
+
+        <form id="formNuevoCurso" class="form-inline">
+          <div class="form-group">
+            <label for="nuevoCurso">Nuevo curso</label>
+            <input type="text" id="nuevoCurso" placeholder="Ej: 7-4">
+          </div>
+          <button type="submit" class="primary-button btn-inline">
+            Añadir curso
+          </button>
+        </form>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre del curso</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="cursosTableBody">
+              <!-- Filas generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <p id="cursosMessage" class="small-text"></p>
+      </div>
+    </section>
+
+    <!-- Panel derecho: MATERIAS -->
+    <section class="right-panel">
+      <div class="card">
+        <h2>Gestionar materias</h2>
+        <p class="small-text">
+          Creá, renombrá o eliminá materias (Matemática, Hardware, Software, etc.).
+        </p>
+
+        <form id="formNuevaMateria" class="form-inline">
+          <div class="form-group">
+            <label for="nuevaMateria">Nueva materia</label>
+            <input type="text" id="nuevaMateria" placeholder="Ej: Física Aplicada">
+          </div>
+          <button type="submit" class="primary-button btn-inline">
+            Añadir materia
+          </button>
+        </form>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre de la materia</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="materiasTableBody">
+              <!-- Filas generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <p id="materiasMessage" class="small-text"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Función para volver a la página anterior -->
+  <script>
+    function volverPaginaAnterior() {
+      // Si venís de otra página del mismo sitio, volvés con el historial
+      if (document.referrer && document.referrer.includes(window.location.host)) {
+        window.history.back();
+      } else {
+        // Si entraste directo (sin historial válido), te manda al inicio
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+</body>
+<footer class="main-footer">
+  <p>Hecho por Comunicaciones Leon</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Boletín Digital - Alumno</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/alumno.js" defer></script>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-inner">
+      <div class="logo-title">
+        <img src="img/logo-boletin.png" alt="Logo Boletín Digital" class="logo-img">
+        <span class="site-name">Boletín Digital</span>
+      </div>
+
+      <nav class="header-actions">
+        <a href="index.html" class="header-button">Volver al inicio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-layout">
+    <section class="right-panel" style="width:100%">
+
+      <!-- Card de boletín -->
+      <div class="card">
+        <!-- Encabezado institucional -->
+        <h2 id="tituloAlumno" style="text-align:center; margin-bottom:0.75rem;">
+          Colegio Provincial Doctor Ernesto Guevara
+        </h2>
+
+        <!-- Encabezado interno del boletín -->
+        <div class="boletin-encabezado" style="display:flex; gap:1rem; align-items:center; margin-bottom:0.75rem;">
+          <!-- Logo + texto a la izquierda -->
+          <div class="boletin-encabezado-izq" style="display:flex; align-items:center; gap:0.5rem;">
+            <img src="img/logo-boletin.png" alt="Logo del colegio" style="height:60px; width:auto;">
+            <div>
+              <strong>Ciclo Superior de la ESO</strong>
+            </div>
+          </div>
+
+          <!-- Datos del alumno a la derecha -->
+          <div class="boletin-encabezado-der" style="margin-left:auto; font-size:0.9rem;">
+            <p><strong>Nombre y apellido:</strong> <span id="boletinNombreAlumno">-</span></p>
+            <p><strong>Curso:</strong> <span id="boletinCursoAlumno">-</span></p>
+            <p><strong>Año lectivo:</strong> <span id="boletinAnio">-</span></p>
+          </div>
+        </div>
+
+        <p class="small-text" id="subtituloAlumno" style="margin-bottom:0.5rem;">
+          Visualización del boletín del ciclo lectivo actual.
+        </p>
+
+        <div class="table-container">
+          <table class="data-table boletin-alumno-table">
+            <thead>
+              <tr>
+                <th rowspan="2">Materia</th>
+                <th colspan="3">Primer cuatrimestre</th>
+                <th colspan="3">Segundo cuatrimestre</th>
+                <th colspan="3">Período de recuperación</th>
+              </tr>
+              <tr>
+                <th>1ra nota parcial</th>
+                <th>2da nota parcial</th>
+                <th>Nota final</th>
+                <th>1ra nota parcial</th>
+                <th>2da nota parcial</th>
+                <th>Nota final</th>
+                <th>Diciembre acreditación</th>
+                <th>Feb/Mar recuperatorio</th>
+                <th>Nota definitiva</th>
+              </tr>
+            </thead>
+            <tbody id="boletinAlumnoBody">
+              <!-- Filas generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <p id="alumnoMessage" class="small-text"></p>
+      </div>
+
+      <!-- Card con botón para mostrar el formulario -->
+      <div class="card" id="base-de-boton">
+        <div class="form-actions" style="margin-top: 1rem;">
+          <button type="button" id="btnMostrarFormPassword" class="secondary-button">
+            Cambiar contraseña
+          </button>
+        </div>
+      </div>
+
+      <!-- Card de cambio de contraseña (oculta por defecto) -->
+      <div class="card" id="cardCambiarPassword" hidden>
+        <h2>Cambiar contraseña</h2>
+        <form id="formCambiarPassword">
+          <div class="form-group">
+            <label for="passActual">Contraseña actual</label>
+            <input type="password" id="passActual" required>
+          </div>
+
+          <div class="form-group">
+            <label for="passNueva">Nueva contraseña</label>
+            <input type="password" id="passNueva" required minlength="8">
+            <small class="hint">
+              Mínimo 8 caracteres. Ideal: combinar mayúsculas, minúsculas, números y símbolos.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="passNueva2">Repetir nueva contraseña</label>
+            <input type="password" id="passNueva2" required minlength="8">
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="primary-button">Actualizar contraseña</button>
+          </div>
+
+          <p id="alumnoPassMessage" class="small-text"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+</body>
+<footer class="main-footer">
+  <p>Hecho por Comunicaciones Leon</p>
+</footer>
+</body>
+</html>

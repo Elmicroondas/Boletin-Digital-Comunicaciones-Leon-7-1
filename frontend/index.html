@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Boletín Digital - Inicio de sesión</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<!-- index.html -->
+<body class="page-index">
+  <!-- resto del contenido -->
+
+  <!-- HEADER ESTÁTICO -->
+  <header class="main-header">
+    <div class="logo-title">
+      <!-- Reemplazá la ruta del logo cuando tengas el archivo -->
+      <img src="img/logo-boletin.png" alt="Logo Boletín Digital" class="logo-img">
+      <span class="site-name">Boletín Digital Colegio Doctor Ernesto Guevara</span>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-layout">
+    <!-- Panel izquierdo: login + registro -->
+    <section class="left-panel">
+      <!-- Tarjeta de login -->
+      <div class="card login-card">
+        <h2>Iniciar sesión</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginUsuario">Nombre de usuario</label>
+            <input type="text" id="loginUsuario" name="usuario" required>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Contraseña</label>
+            <input type="password" id="loginPassword" name="password" required>
+          </div>
+
+          <button type="submit" class="primary-button">Iniciar sesión</button>
+          <p id="loginError" class="error-message"></p>
+        </form>
+
+        <hr class="divider">
+
+        <p class="small-text">¿Todavía no tenés cuenta?</p>
+        <button type="button" id="showRegisterBtn" class="secondary-button">
+          Crear cuenta
+        </button>
+      </div>
+
+      <!-- Tarjeta de registro (oculta por defecto) -->
+      <div class="card register-card" id="registerCard" hidden>
+        <h2>Crear cuenta</h2>
+        <p class="small-text">
+          Este formulario es exclusivo para alumnos del colegio.
+        </p>
+
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="regUsuario">Nombre de usuario</label>
+            <input type="text" id="regUsuario" name="usuario" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regPassword">Contraseña (segura)</label>
+            <input type="password" id="regPassword" name="password" required minlength="8">
+            <small class="hint">
+              Mínimo 8 caracteres. Ideal: combinar mayúsculas, minúsculas, números y símbolos.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="regDni">DNI</label>
+            <input type="number" id="regDni" name="dni" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regNombreCompleto">Nombre completo</label>
+            <input type="text" id="regNombreCompleto" name="nombreCompleto" required>
+          </div>
+
+          <!-- Campo oculto: la cuenta creada desde aquí siempre es ALUMNO (no se muestra al usuario) -->
+          <!-- Selección de curso para alumnos -->
+          <div class="form-group" id="cursoGroup" hidden>
+            <label for="regCurso">Curso</label>
+            <select id="regCurso" name="curso" disabled>
+              <option value="">Seleccionar curso</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="primary-button">Registrar cuenta</button>
+            <button type="button" id="cancelRegisterBtn" class="text-button">
+              Cancelar
+            </button>
+          </div>
+
+          <p id="registerError" class="error-message"></p>
+          <p id="registerSuccess" class="success-message"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Panel derecho: explicación + novedades -->
+    <section class="right-panel">
+      <!-- Bloque de explicación -->
+      <article class="info-block">
+        <h2>¿Qué es el Boletín Digital?</h2>
+        <p>
+          El Boletín Digital es una plataforma interna del colegio que permite
+          consultar las calificaciones y la trayectoria escolar de forma segura,
+          rápida y desde cualquier computadora conectada a la red de la institución.
+        </p>
+        <p>
+          El Departamento de Alumnado se encarga de cargar y actualizar las notas,
+          mientras que los alumnos y las familias pueden ver el boletín en tiempo real.
+        </p>
+      </article>
+
+      <!-- Bloque de novedades -->
+      <article class="news-block">
+        <h2>Novedades</h2>
+        <ul class="news-list">
+          <li>
+            <strong>Versión inicial:</strong> Se habilitó el acceso para alumnos de 7°.
+          </li>
+          <li>
+            <strong>Próximamente:</strong> Consulta de historial de ciclos lectivos anteriores.
+          </li>
+          <li>
+            <strong>Mantenimiento:</strong> La plataforma puede detenerse brevemente
+            durante tareas de mantenimiento programadas.
+          </li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+<footer class="main-footer">
+  <p>Hecho por Comunicaciones Leon</p>
+</footer>
+</body>
+</html>
+
