@@ -1,64 +1,90 @@
-CREATE DATABASE boletin_digital
+-- Crear base de datos
+CREATE DATABASE IF NOT EXISTS `boletin_digital`
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_spanish_ci;
 
-USE boletin_digital;
--- Tabla usuarios
-CREATE TABLE usuarios (
-  id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-  usuario VARCHAR(50) NOT NULL UNIQUE,
-  contrasena_hash VARCHAR(255) NOT NULL,
-  nombre_completo VARCHAR(100) NOT NULL,
-  email VARCHAR(100) NOT NULL UNIQUE,
-  dni CHAR(8) NOT NULL UNIQUE,
-  rol ENUM('alumno','alumnado','admin') NOT NULL,
-  id_curso INT NULL,
-  estado_cuenta ENUM('pendiente','aprobado','rechazado') 
-      NOT NULL DEFAULT 'pendiente',
-  CONSTRAINT fk_usuarios_curso FOREIGN KEY (id_curso)
-    REFERENCES cursos(id_curso)
-);
+USE `boletin_digital`;
 
--- Tabla cursos
-CREATE TABLE cursos (
-  id_curso INT AUTO_INCREMENT PRIMARY KEY,
-  nombre_curso VARCHAR(20) NOT NULL UNIQUE
-);
+-- ========================
+-- TABLA: cursos
+-- ========================
+CREATE TABLE `cursos` (
+  `id_curso` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre_curso` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`id_curso`),
+  UNIQUE KEY `uq_cursos_nombre` (`nombre_curso`)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_spanish_ci;
 
+-- ========================
+-- TABLA: materias
+-- ========================
+CREATE TABLE `materias` (
+  `id_materia` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre_materia` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id_materia`),
+  UNIQUE KEY `uq_materias_nombre` (`nombre_materia`)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_spanish_ci;
 
--- Tabla materias
-CREATE TABLE materias (
-  id_materia INT AUTO_INCREMENT PRIMARY KEY,
-  nombre_materia VARCHAR(100) NOT NULL UNIQUE
-);
+-- ========================
+-- TABLA: usuarios
+-- ========================
+CREATE TABLE `usuarios` (
+  `id_usuario` INT(11) NOT NULL AUTO_INCREMENT,
+  `usuario` VARCHAR(50) NOT NULL,
+  `contrasena_hash` VARCHAR(255) NOT NULL,
+  `nombre_completo` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `dni` CHAR(8) NOT NULL,
+  `rol` ENUM('alumno','alumnado','admin') NOT NULL,
+  `estado_cuenta` ENUM('pendiente','aprobado','deshabilitado') NOT NULL DEFAULT 'pendiente',
+  `id_curso` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `uq_usuarios_usuario` (`usuario`),
+  UNIQUE KEY `uq_usuarios_email` (`email`),
+  UNIQUE KEY `uq_usuarios_dni` (`dni`),
+  KEY `idx_usuarios_curso` (`id_curso`),
+  CONSTRAINT `fk_usuarios_curso`
+    FOREIGN KEY (`id_curso`)
+    REFERENCES `cursos` (`id_curso`)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_spanish_ci;
 
--- Tabla boletines
-CREATE TABLE boletines (
-  id_boletin INT AUTO_INCREMENT PRIMARY KEY,
-  id_usuario INT NOT NULL,
-  id_materia INT NOT NULL,
-  anio_lectivo YEAR NOT NULL,
-
-  p1_1c TINYINT UNSIGNED NULL,
-  p2_1c TINYINT UNSIGNED NULL,
-  nf_1c TINYINT UNSIGNED NULL,
-
-  p1_2c TINYINT UNSIGNED NULL,
-  p2_2c TINYINT UNSIGNED NULL,
-  nf_2c TINYINT UNSIGNED NULL,
-
-  nota_anual TINYINT UNSIGNED NULL,
-  diciembre_acreditacion TINYINT UNSIGNED NULL,
-  feb_mar_recuperatorio TINYINT UNSIGNED NULL,
-  nota_definitiva TINYINT UNSIGNED NULL,
-
-  CONSTRAINT fk_boletin_usuario FOREIGN KEY (id_usuario)
-    REFERENCES usuarios(id_usuario)
+-- ========================
+-- TABLA: boletines
+-- ========================
+CREATE TABLE `boletines` (
+  `id_boletin` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` INT(11) NOT NULL,
+  `id_materia` INT(11) NOT NULL,
+  `anio_lectivo` YEAR(4) NOT NULL,
+  `p1_1c` TINYINT(3) UNSIGNED DEFAULT NULL,
+  `p2_1c` TINYINT(3) UNSIGNED DEFAULT NULL,
+  `nf_1c` TINYINT(3) UNSIGNED DEFAULT NULL,
+  `p1_2c` TINYINT(3) UNSIGNED DEFAULT NULL,
+  `p2_2c` TINYINT(3) UNSIGNED DEFAULT NULL,
+  `nf_2c` TINYINT(3) UNSIGNED DEFAULT NULL,
+  `nota_anual` TINYINT(3) UNSIGNED DEFAULT NULL,
+  `diciembre_acreditacion` TINYINT(3) UNSIGNED DEFAULT NULL,
+  `feb_mar_recuperatorio` TINYINT(3) UNSIGNED DEFAULT NULL,
+  `nota_definitiva` TINYINT(3) UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (`id_boletin`),
+  -- Un boletín por alumno + materia + año lectivo
+  UNIQUE KEY `uc_boletin` (`id_usuario`,`id_materia`,`anio_lectivo`),
+  KEY `idx_boletines_materia` (`id_materia`),
+  CONSTRAINT `fk_boletin_usuario`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `usuarios` (`id_usuario`)
     ON DELETE CASCADE,
+  CONSTRAINT `fk_boletin_materia`
+    FOREIGN KEY (`id_materia`)
+    REFERENCES `materias` (`id_materia`)
+    ON DELETE CASCADE
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_spanish_ci;
 
-  CONSTRAINT fk_boletin_materia FOREIGN KEY (id_materia)
-    REFERENCES materias(id_materia)
-    ON DELETE CASCADE,
-
-  CONSTRAINT uc_boletin UNIQUE (id_usuario, id_materia, anio_lectivo)
-);
